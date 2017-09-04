@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import RegisterForm from './RegisterForm'
 import userActions from '../../actions/UserActions'
 import userStore from '../../stores/UserStore'
+import ResponseHelper from '../common/ResponseHelper'
+import FormHelper from '../common/FormHelper'
 
 class Register extends Component {
   constructor (props) {
@@ -18,6 +20,8 @@ class Register extends Component {
     }
 
     this.handleUserRegistration = this.handleUserRegistration.bind(this)
+    this.validateForm = this.validateForm.bind(this)
+
     userStore.on(
       userStore.eventTypes.USER_REGISTERED,
       this.handleUserRegistration
@@ -31,25 +35,47 @@ class Register extends Component {
     )
   }
 
-  handleUserChange (event) {
-    const target = event.target
-    const field = target.name
-    const value = target.value
+  handleFormChange (event) {
+    FormHelper.handleFormChange.call(this, event, 'user')
+  }
 
-    const user = this.state.user
-    user[field] = value
+  validateForm () {
+    let user = this.state.user
+    let error = ''
 
-    this.setState(this.state)
+    if (user.password !== user.confirmPassword) {
+      error = 'Password and confirm password do not match.'
+    }
+
+    if (user.password.length < 4) {
+      error = 'Pasword should be at least 4 characters long.'
+    }
+
+    if (!user.email) {
+      error = 'User email is required'
+    }
+
+    if (!user.name) {
+      error = 'User name is required'
+    }
+
+    if (error) {
+      this.setState({error})
+      return false
+    }
+
+    return true
   }
 
   handleUserRegistration (data) {
-    console.log(data)
+    ResponseHelper.handleResponse.call(this, data, '/users/login')
   }
 
-  onSubmit (event) {
+  handleFormSubmit (event) {
     event.preventDefault()
-    // TODO: Validation
-    userActions.register(this.state.user)
+    if (this.validateForm()) {
+      userActions.register(this.state.user)
+    }
   }
 
   render () {
@@ -58,9 +84,9 @@ class Register extends Component {
         <h1>Register User</h1>
         <RegisterForm
           user={this.state.user}
-          onChange={this.handleUserChange.bind(this)}
+          onChange={this.handleFormChange.bind(this)}
           error={this.state.error}
-          onSubmit={this.onSubmit.bind(this)} />
+          onSubmit={this.handleFormSubmit.bind(this)} />
       </div>
     )
   }
