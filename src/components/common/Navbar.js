@@ -15,6 +15,13 @@ class Navbar extends Component {
               <li className='active'><Link to='/'>Home</Link></li>
             </ul>
             {Auth.isAuthenticated() ? (
+                <ul className='nav navbar-nav'>
+                  <li><Link to='/pets/create'>Create Pet</Link></li>
+                </ul>
+              ) : (
+                null
+              )}
+            {Auth.isAuthenticated() ? (
               <ul className='nav navbar-nav navbar-right'>
                 <li><Link to='/'><span className='glyphicon glyphicon-user' /> {Auth.getUser().name}</Link></li>
                 <li><Link to='/users/logout'><span className='glyphicon glyphicon-log-in' /> Logout</Link></li>

@@ -8,7 +8,7 @@ class Http {
     let axiosOptions = { headers: {} }
 
     if (secured) {
-      axiosOptions.headers['Authorization'] = `bearer ${Auth.getToken}`
+      axiosOptions.headers['Authorization'] = `bearer ${Auth.getToken()}`
     }
 
     return axios.get(`${BASE_URL}${url}`, axiosOptions)
@@ -19,7 +19,7 @@ class Http {
     let axiosOptions = { headers: {} }
 
     if (secured) {
-      axiosOptions.headers['Authorization'] = `bearer ${Auth.getToken}`
+      axiosOptions.headers['Authorization'] = `bearer ${Auth.getToken()}`
     }
 
     return axios.post(`${BASE_URL}${url}`, data, axiosOptions)

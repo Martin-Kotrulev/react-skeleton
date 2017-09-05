@@ -1,15 +1,14 @@
 import Http from '../Http'
 
-const registerUrl = '/auth/signup'
-const loginUrl = '/auth/login'
+const baseUrl = '/auth'
 
 class UserData {
   static registerUser (user) {
-    return Http.post(registerUrl, user)
+    return Http.post(`${baseUrl}/signup`, user)
   }
 
   static loginUser (user) {
-    return Http.post(loginUrl, user)
+    return Http.post(`${baseUrl}/login`, user)
   }
 }
 

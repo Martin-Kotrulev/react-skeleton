@@ -29,6 +29,7 @@ class UserStore extends EventEmitter {
 }
 
 let userStore = new UserStore()
+
 userStore.eventTypes = {
   USER_REGISTERED: 'USER_REGISTERED',
   USER_LOGGED_IN: 'USER_LOGGED_IN'
