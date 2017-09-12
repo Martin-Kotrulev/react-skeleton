@@ -1,8 +1,14 @@
-class FormHelper {
+export default class FormHelper {
   static handleFormChange (event, stateField) {
     const target = event.target
     const field = target.name
-    const value = target.value
+
+    let value
+    if (target.type === 'checkbox') {
+      value = target.checked
+    } else {
+      value = target.value
+    }
 
     const state = this.state[stateField]
     state[field] = value
@@ -10,5 +16,3 @@ class FormHelper {
     this.setState({ [stateField]: state })
   }
 }
-
-export default FormHelper

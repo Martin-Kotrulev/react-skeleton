@@ -1,7 +1,7 @@
 import toastr from 'toastr'
 import Auth from '../../Auth'
 
-class ResponseHelper {
+export default class ResponseHelper {
   static handleResponse (data, redirectPath) {
     if (data.success) {
       toastr.success(data.message)
@@ -21,11 +21,10 @@ class ResponseHelper {
       if (data.errors) {
         let firstError = Object.keys(data.errors)
           .map(k => data.errors[k])[0]
+        this.setState({ error: firstError })
       } else {
-        this.setState({error: data.message})
+        this.setState({ error: data.message })
       }
     }
   }
 }
-
-export default ResponseHelper

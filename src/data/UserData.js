@@ -1,6 +1,6 @@
 import Http from '../Http'
 
-const baseUrl = '/auth'
+const baseUrl = '/users'
 
 class UserData {
   static registerUser (user) {

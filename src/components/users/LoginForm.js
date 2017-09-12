@@ -1,31 +1,27 @@
 import React from 'react'
 import Input from '../common/Input'
+import { Button, Form, Col, Label } from 'react-bootstrap'
 
 const LoginForm = (props) => (
-  <div>
-    <form onSubmit={props.onSubmit}>
-      {props.error ? <h3>{props.error}</h3> : null}
-      <div className='form-group'>
-        <Input
-          className='form-control'
-          name='email'
-          value={props.user.email}
-          onChange={props.onChange} 
-          label='User E-mail' />
-      </div>
-      <div className='form-group'>
-        <Input
-          className='form-control'
-          name='password'
-          type='password'
-          value={props.user.password}
-          onChange={props.onChange}
-          label='Password' />
-      </div>
-      <button
-        className='btn btn-default'>Login</button>
-    </form>
-  </div>
+  <Col lg={6} lgOffset={3}>
+    <Form onSubmit={props.onSubmit}>
+      {props.error ? <h3><Label bsStyle='danger'>{props.error}</Label></h3> : null}
+      <Input
+        className='form-control'
+        name='email'
+        value={props.user.email}
+        onChange={props.onChange}
+        label='User E-mail' />
+      <Input
+        className='form-control'
+        name='password'
+        type='password'
+        value={props.user.password}
+        onChange={props.onChange}
+        label='Password' />
+      <Button bsStyle='primary' type='submit'>Login</Button>
+    </Form>
+  </Col>
 )
 
 export default LoginForm

@@ -1,4 +1,5 @@
 @import '~toastr/build/toastr.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
 
 body {
   margin: 0;

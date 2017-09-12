@@ -1,42 +1,38 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import Auth from '../../Auth'
+import { Navbar, Nav } from 'react-bootstrap'
+import RouteNavItem from './RouteNavItem'
+import BrandLink from './BrandLink'
 
-class Navbar extends Component {
+export default class AppNavbar extends Component {
   render () {
     return (
-      <div>
-        <nav className='navbar navbar-default'>
-          <div className='container-fluid'>
-            <div className='navbar-header'>
-              <Link className='navbar-brand' to='/'>ReactSkeleton</Link>
-            </div>
-            <ul className='nav navbar-nav'>
-              <li className='active'><Link to='/'>Home</Link></li>
-            </ul>
-            {Auth.isAuthenticated() ? (
-                <ul className='nav navbar-nav'>
-                  <li><Link to='/pets/create'>Create Pet</Link></li>
-                </ul>
+      <Navbar>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <BrandLink to='/'>ReactSkeleton</BrandLink>
+          </Navbar.Brand>
+        </Navbar.Header>
+        <Nav>
+          <RouteNavItem to='/'>Home</RouteNavItem>
+        </Nav>
+        {Auth.isAuthenticated() ? (
+          <ul className='nav navbar-nav' />
               ) : (
                 null
               )}
-            {Auth.isAuthenticated() ? (
-              <ul className='nav navbar-nav navbar-right'>
-                <li><Link to='/'><span className='glyphicon glyphicon-user' /> {Auth.getUser().name}</Link></li>
-                <li><Link to='/users/logout'><span className='glyphicon glyphicon-log-in' /> Logout</Link></li>
-              </ul>
+        {Auth.isAuthenticated() ? (
+          <Nav>
+            <RouteNavItem to='/'><span className='glyphicon glyphicon-user' /> {Auth.getUser().name}</RouteNavItem>
+            <RouteNavItem to='/users/logout'><span className='glyphicon glyphicon-log-in' /> Logout</RouteNavItem>
+          </Nav>
             ) : (
-              <ul className='nav navbar-nav navbar-right'>
-                <li><Link to='/users/register'><span className='glyphicon glyphicon-user' /> Register</Link></li>
-                <li><Link to='/users/login'><span className='glyphicon glyphicon-log-in' /> Login</Link></li>
-              </ul>
+              <Nav pullRight>
+                <RouteNavItem to='/users/login'><span className='glyphicon glyphicon-user' /> Login</RouteNavItem>
+                <RouteNavItem to='/users/register'><span className='glyphicon glyphicon-log-in' /> Register</RouteNavItem>
+              </Nav>
             )}
-          </div>
-        </nav>
-      </div>
+      </Navbar>
     )
   }
 }
-
-export default Navbar

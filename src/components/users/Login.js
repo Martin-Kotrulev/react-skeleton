@@ -12,12 +12,13 @@ class Login extends Component {
     this.state = {
       user: {
         email: '',
-        password: '',
+        password: ''
       },
       error: ''
     }
 
     this.handleUserLogin = this.handleUserLogin.bind(this)
+    this.validateForm = this.validateForm.bind(this)
 
     userStore.on(
       userStore.eventTypes.USER_LOGGED_IN,
@@ -32,6 +33,26 @@ class Login extends Component {
     )
   }
 
+  validateForm () {
+    let user = this.state.user
+    let error = ''
+
+    if (!user.password) {
+      error = 'No password provided.'
+    }
+
+    if (!user.email) {
+      error = 'No email provided.'
+    }
+
+    if (error) {
+      this.setState({error})
+      return false
+    }
+
+    userActions.login(this.state.user)
+  }
+
   handleUserLogin (data) {
     ResponseHelper.handleResponse.call(this, data, '/')
   }
@@ -41,15 +62,15 @@ class Login extends Component {
   }
 
   handleFormSubmit (event) {
-    event.preventDefault();
-    userActions.login(this.state.user)
+    event.preventDefault()
+    this.validateForm()
   }
 
   render () {
     return (
       <div>
         <h1>Login in to your account</h1>
-        <LoginForm 
+        <LoginForm
           user={this.state.user}
           onChange={this.handleFormChange.bind(this)}
           error={this.state.error}

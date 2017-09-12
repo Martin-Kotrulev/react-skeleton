@@ -7,10 +7,6 @@ class Auth {
     return JSON.parse(window.localStorage.getItem('user'))
   }
 
-  static removeUser (user) {
-    window.localStorage.removeItem('user')
-  }
-
   static authenticateUser (token) {
     window.localStorage.setItem('token', token)
   }

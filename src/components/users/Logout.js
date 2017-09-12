@@ -1,8 +1,8 @@
 import { Component } from 'react'
 import Auth from '../../Auth'
 
-class Logout extends Component {
-  componentWillMount() {
+export default class Logout extends Component {
+  componentWillMount () {
     Auth.deauthenticateUser()
     this.props.history.push('/users/login')
   }
@@ -11,5 +11,3 @@ class Logout extends Component {
     return null
   }
 }
-
-export default Logout
