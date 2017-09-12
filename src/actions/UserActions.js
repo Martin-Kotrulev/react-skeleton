@@ -6,6 +6,7 @@ const userActions = {
     LOGIN_USER: 'LOGIN_USER'
   },
   register (user) {
+    console.log(user)
     Dispatcher.dispatch({
       type: this.types.REGISTER_USER,
       payload: user

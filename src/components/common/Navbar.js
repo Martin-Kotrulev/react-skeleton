@@ -17,13 +17,13 @@ export default class AppNavbar extends Component {
           <RouteNavItem to='/'>Home</RouteNavItem>
         </Nav>
         {Auth.isAuthenticated() ? (
-          <ul className='nav navbar-nav' />
+          <Nav />
               ) : (
                 null
               )}
         {Auth.isAuthenticated() ? (
-          <Nav>
-            <RouteNavItem to='/'><span className='glyphicon glyphicon-user' /> {Auth.getUser().name}</RouteNavItem>
+          <Nav pullRight>
+            <RouteNavItem to='/'><span className='glyphicon glyphicon-user' /> {Auth.getUser()}</RouteNavItem>
             <RouteNavItem to='/users/logout'><span className='glyphicon glyphicon-log-in' /> Logout</RouteNavItem>
           </Nav>
             ) : (

@@ -54,6 +54,7 @@ class Login extends Component {
   }
 
   handleUserLogin (data) {
+    console.log(data)
     ResponseHelper.handleResponse.call(this, data, '/')
   }
 

@@ -13,6 +13,7 @@ class Http {
 
     return axios.get(`${BASE_URL}${url}`, axiosOptions)
       .then(res => res.data)
+      .catch(err => err.response.data)
   }
 
   static post (url, data, secured = false) {
@@ -24,6 +25,7 @@ class Http {
 
     return axios.post(`${BASE_URL}${url}`, data, axiosOptions)
       .then(res => res.data)
+      .catch(err => err.response.data)
   }
 }
 

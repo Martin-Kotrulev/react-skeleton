@@ -63,13 +63,19 @@ export default class Register extends Component {
   }
 
   handleUserRegistration (data) {
-    ResponseHelper.handleResponse.call(this, data, '/users/login')
+    ResponseHelper.handleResponse.call(this, data, '/')
   }
 
   handleFormSubmit (event) {
     event.preventDefault()
     if (this.validateForm()) {
-      userActions.register(this.state.user)
+      // Mutate user for register
+      let user = {
+        email: this.state.user.email,
+        password: this.state.user.password
+      }
+
+      userActions.register(user)
     }
   }
 

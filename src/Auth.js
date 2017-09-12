@@ -1,10 +1,14 @@
 class Auth {
   static saveUser (user) {
-    window.localStorage.setItem('user', JSON.stringify(user))
+    window.localStorage.setItem('user', user)
   }
 
   static getUser () {
-    return JSON.parse(window.localStorage.getItem('user'))
+    return window.localStorage.getItem('user')
+  }
+
+  static setTokenExpiration (expires) {
+    window.localStorage.setItem('expires', expires)
   }
 
   static authenticateUser (token) {
@@ -12,7 +16,16 @@ class Auth {
   }
 
   static isAuthenticated () {
-    return window.localStorage.getItem('token') !== null
+    let isValid = window.localStorage.getItem('token') !== null
+
+    if (!isValid) return isValid
+
+    isValid = Date.now() <= new Date(
+      window.localStorage.getItem('expires'))
+
+    if (!isValid) this.deauthenticateUser()
+
+    return isValid
   }
 
   static deauthenticateUser () {
