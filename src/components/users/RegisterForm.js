@@ -8,12 +8,6 @@ const RegisterForm = (props) => (
       {props.error ? <h3><Label bsStyle='danger'>{props.error}</Label></h3> : null}
       <Input
         className='form-control'
-        name='name'
-        value={props.user.name}
-        onChange={props.onChange}
-        label='User name' />
-      <Input
-        className='form-control'
         name='email'
         value={props.user.email}
         onChange={props.onChange}

@@ -11,7 +11,6 @@ export default class Register extends Component {
 
     this.state = {
       user: {
-        name: '',
         email: '',
         password: '',
         confirmPassword: ''
@@ -53,10 +52,6 @@ export default class Register extends Component {
 
     if (!user.email) {
       error = 'User email is required'
-    }
-
-    if (!user.name) {
-      error = 'User name is required'
     }
 
     if (error) {
